@@ -72,7 +72,7 @@ body.lit header,body.lit .ticker,body.lit .intro,body.lit .hallWrap,body.lit foo
 .kicker i{flex:0 0 42px;height:1px;background:#3a3122}
 .intro h1{font-family:'Press Start 2P';font-size:clamp(17px,3.2vw,30px);line-height:1.6;color:var(--amber);margin:26px 0 20px}
 .intro h1 .soft{color:var(--ink)}
-.lede{font-family:'VT323';font-size:clamp(20px,2.2vw,24px);line-height:1.35;color:var(--dim);max-width:660px}
+.lede{font-family:'VT323';font-size:clamp(20px,2.2vw,24px);line-height:1.35;color:var(--dim);max-width:680px}
 .down{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-family:'Press Start 2P';font-size:11px;color:var(--ink);text-decoration:none;border:1px solid var(--line2);background:#191106;padding:12px 16px;border-radius:4px;transition:.2s}
 .down:hover{border-color:var(--amber);color:var(--amber);transform:translateY(2px)}
 .down svg{width:14px;height:14px;fill:currentColor}
@@ -160,16 +160,37 @@ body.lit header,body.lit .ticker,body.lit .intro,body.lit .hallWrap,body.lit foo
 .playbtn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--accf)}
 .hiscr{margin-left:auto;font-family:'VT323';font-size:19px;color:var(--dim);letter-spacing:2px}
 
+/* ---------- gauntlet kiosk ---------- */
+.kiosk{align-self:center;width:min(560px,100%);margin-top:46px;background:#171208;border:1px solid var(--line2);border-radius:14px;box-shadow:0 34px 60px -22px rgba(0,0,0,.9)}
+.kHead{font-family:'Press Start 2P';font-size:15px;letter-spacing:2px;color:var(--amber);text-align:center;padding:18px 12px;border-bottom:1px solid var(--line);border-radius:13px 13px 0 0;background:radial-gradient(ellipse at 50% 140%,rgba(255,177,0,.14),transparent 70%)}
+.kBody{padding:18px 22px 22px;display:flex;flex-direction:column;gap:14px}
+.kTag{font-family:'VT323';font-size:21px;color:var(--dim);letter-spacing:2px;text-align:center}
+.kLine{display:flex;justify-content:center;gap:8px;padding:4px 0}
+.kLine i{width:30px;height:30px;border:1px solid;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P';font-size:11px;border-radius:4px;font-style:normal}
+.g1{color:#54ff6e;border-color:#54ff6e}
+.g2{color:#ffb100;border-color:#ffb100}
+.g3{color:#ff5533;border-color:#ff5533}
+.g4{color:#ffe9c0;border-color:#ffe9c0}
+.g5{color:#ff6fd8;border-color:#ff6fd8}
+.g6{color:#4dffd2;border-color:#4dffd2}
+.kDesc{font-family:'VT323';font-size:20px;line-height:1.3;color:var(--dim);text-align:center}
+.kDesc b{color:var(--ink);font-weight:normal}
+.kBtn{font-family:'Press Start 2P';font-size:11px;letter-spacing:1px;color:#140d02;background:var(--amber);border:none;border-radius:4px;padding:15px 16px;cursor:pointer;box-shadow:0 3px 0 #a87a10;align-self:center}
+.kBtn:hover{filter:brightness(1.1)}
+.kBtn:active{transform:translateY(2px);box-shadow:0 1px 0 #a87a10}
+.kFoot{display:flex;align-items:center;gap:12px;justify-content:center}
+
 @media(max-width:780px){
   #cab-snake,#cab-breakout,#cab-void,#cab-pong,#cab-invaders,#cab-blocks{width:100%;margin:22px 0 0;align-self:stretch;--rot:0deg}
   .marquee span{font-size:11px;padding:7px 4px}
+  .kiosk{margin-top:30px}
 }
 
 /* ---------- play overlay ---------- */
 #playOverlay{position:fixed;inset:0;z-index:200;background:rgba(6,4,2,.93);display:none;align-items:center;justify-content:center;padding:18px}
 #playOverlay.open{display:flex;animation:fadeIn .22s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.stage{width:min(94vw,780px);display:flex;flex-direction:column;gap:14px}
+.stage{width:min(94vw,780px);display:flex;flex-direction:column;gap:12px;position:relative}
 .bigbezel{padding:14px;background:#080604;border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 90px rgba(0,0,0,.7)}
 .inner{position:relative;width:100%;height:100%;border-radius:10px/12px;overflow:hidden;background:#020202}
 .inner canvas{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none;cursor:crosshair}
@@ -186,6 +207,23 @@ body.lit header,body.lit .ticker,body.lit .intro,body.lit .hallWrap,body.lit foo
   55%{transform:scale(1,.01);filter:brightness(4)}
   100%{transform:scale(.001,.01);filter:brightness(6);opacity:0}
 }
+
+/* gauntlet progress bar */
+#gauntletBar{display:none;align-items:center;gap:12px;background:#120d06;border:1px solid var(--line2);border-radius:8px;padding:9px 14px}
+#gauntletBar.show{display:flex;animation:fadeIn .3s}
+#gauntletBar .glabel{font-family:'Press Start 2P';font-size:9px;color:var(--amber);letter-spacing:1px}
+#pips{display:flex;gap:6px;flex:1;justify-content:center}
+.pip{width:24px;height:24px;border:1px solid;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P';font-size:9px}
+.pip.cur{animation:pipblink 1s steps(2) infinite}
+@keyframes pipblink{0%,49%{opacity:1}50%,100%{opacity:.35}}
+#gTotal{font-family:'Press Start 2P';font-size:10px;color:var(--amber)}
+@media(max-width:480px){
+  #gauntletBar{gap:8px;padding:8px 10px}
+  .pip{width:18px;height:18px;font-size:8px}
+  #gauntletBar .glabel{font-size:8px}
+  #gTotal{font-size:9px}
+}
+
 .playbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:0 4px}
 .ghostBtn{display:inline-flex;align-items:center;gap:8px;font-family:'Press Start 2P';font-size:10px;letter-spacing:1px;color:var(--ink);background:#191106;border:1px solid var(--line2);padding:11px 13px;border-radius:4px;cursor:pointer;transition:border-color .15s}
 .ghostBtn:hover{border-color:var(--amber);color:var(--amber)}
@@ -197,6 +235,24 @@ body.lit header,body.lit .ticker,body.lit .intro,body.lit .hallWrap,body.lit foo
 .coinbox em{font-family:'VT323';font-style:normal;font-size:17px;color:var(--dim)}
 #credits{font-family:'Press Start 2P';font-size:11px;color:var(--amber)}
 
+/* gauntlet results */
+#results{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,4,2,.9);z-index:5;border-radius:10px}
+#results.show{display:flex;animation:fadeIn .3s}
+.resPanel{width:min(94%,440px);max-height:96%;overflow:auto;background:#120d06;border:1px solid var(--line2);border-radius:12px;padding:22px}
+.resPanel h3{font-family:'Press Start 2P';font-size:13px;color:var(--amber);text-align:center;letter-spacing:1px}
+.resRow{margin:11px 0 0}
+.resRow .rt{display:flex;justify-content:space-between;align-items:center}
+.resRow .rt span{font-family:'Press Start 2P';font-size:9px}
+.resRow .rt em{font-family:'Press Start 2P';font-size:9px;color:#8f8672;font-style:normal}
+.resRow .rb{height:4px;background:#241c0e;border-radius:2px;margin-top:6px;overflow:hidden}
+.resRow .rb i{display:block;height:100%}
+.resTotal{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line2)}
+.resTotal span{font-family:'Press Start 2P';font-size:10px;color:#e8dcc4}
+.resTotal b{font-family:'Press Start 2P';font-size:13px;color:var(--amber)}
+#resNote{font-family:'VT323';font-size:21px;color:#ffd24a;text-align:center;margin-top:10px;min-height:24px;letter-spacing:2px}
+.resBtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.resBtns .playbtn{--acc:#ffb100;--accf:#a87a10}
+
 /* ---------- toast / footer ---------- */
 #toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,16px);opacity:0;transition:.28s;z-index:250;
   font-family:'Press Start 2P';font-size:10px;letter-spacing:1px;color:var(--amber);
@@ -206,7 +262,7 @@ body.lit header,body.lit .ticker,body.lit .intro,body.lit .hallWrap,body.lit foo
 footer{max-width:1160px;margin:0 auto;padding:44px clamp(16px,5vw,56px) 60px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'VT323';font-size:19px;color:#6f6754;letter-spacing:2px}
 
 @media (prefers-reduced-motion:reduce){
-  .tickerTrack,.roll,.lights,.sign span{animation:none}
+  .tickerTrack,.roll,.lights,.sign span,.pip.cur{animation:none}
 }
 </style>
 </head>
@@ -241,8 +297,8 @@ footer{max-width:1160px;margin:0 auto;padding:44px clamp(16px,5vw,56px) 60px;dis
 
 <section class="intro">
   <p class="kicker"><i></i>EST. 1983 1/2 &middot; FREE PLAY ALL NIGHT<i></i></p>
-  <h1><span class="soft">SIX CABINETS.<br>ONE DIM ROOM.</span><br>ZERO QUARTERS.</h1>
-  <p class="lede">Every screen on this floor is running right now — six machines play themselves until you step up. Pick a cabinet, drop a coin, take the high score. Score enough and the house pays your credits back.</p>
+  <h1><span class="soft">SIX CABINETS.<br>ONE GAUNTLET.</span><br>ZERO QUARTERS.</h1>
+  <p class="lede">Every screen on this floor is running right now — six machines play themselves until you step up. HYPERPONG takes a challenger for hot-seat duels, and at the back of the room the Gauntlet runs all six games back-to-back for one combined score. Score enough anywhere and the house pays your credits back.</p>
   <a class="down" href="#hall">PICK A MACHINE <svg viewBox="0 0 24 24"><path d="M12 16l-6-6 1.4-1.4L12 13.2l4.6-4.6L18 10z"/></svg></a>
 </section>
 
@@ -363,6 +419,18 @@ footer{max-width:1160px;margin:0 auto;padding:44px clamp(16px,5vw,56px) 60px;dis
         <span class="hiscr">HI 000000</span>
       </div>
     </article>
+
+    <!-- tournament kiosk -->
+    <section class="kiosk" id="kiosk" aria-label="the gauntlet tournament">
+      <div class="kHead">THE GAUNTLET</div>
+      <div class="kBody">
+        <p class="kTag">six games. one run. no breaks.</p>
+        <div class="kLine"><i class="g1">S</i><i class="g2">B</i><i class="g3">V</i><i class="g4">H</i><i class="g5">S</i><i class="g6">G</i></div>
+        <p class="kDesc">Run every cabinet on this floor back to back — a life ends an event, not the run. Your scores stack into <b>one total</b>. Finish the gauntlet and the house pays <b>3 credits</b> and keeps your record on the board. Bail out midway and <b>nothing is saved</b>.</p>
+        <button class="kBtn" id="tourBtn">RUN THE GAUNTLET - 2 CREDITS</button>
+        <div class="kFoot"><span class="led"></span><span class="hiscr" id="kioskHi">RECORD 000000</span></div>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -374,6 +442,11 @@ footer{max-width:1160px;margin:0 auto;padding:44px clamp(16px,5vw,56px) 60px;dis
 <!-- full-screen play mode -->
 <div id="playOverlay">
   <div class="stage">
+    <div id="gauntletBar">
+      <span class="glabel">GAUNTLET</span>
+      <span id="pips"></span>
+      <span id="gTotal">000000</span>
+    </div>
     <div class="bigbezel">
       <div class="screen">
         <div class="inner" id="screenInner">
@@ -396,6 +469,18 @@ footer{max-width:1160px;margin:0 auto;padding:44px clamp(16px,5vw,56px) 60px;dis
           <svg id="icoPause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
           <svg id="icoPlay" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M7 5v14l12-7z"/></svg>
         </button>
+      </div>
+    </div>
+    <div id="results">
+      <div class="resPanel">
+        <h3>GAUNTLET COMPLETE</h3>
+        <div id="resRows"></div>
+        <div class="resTotal"><span>TOTAL</span><b id="resTotal">000000</b></div>
+        <p id="resNote"></p>
+        <div class="resBtns">
+          <button id="againBtn" class="playbtn">RUN IT AGAIN - 2 CR</button>
+          <button id="resExitBtn" class="ghostBtn">EXIT TO FLOOR</button>
+        </div>
       </div>
     </div>
   </div>
@@ -421,7 +506,7 @@ const Store={
   set(k,v){try{localStorage.setItem('cathode_'+k,JSON.stringify(v))}catch(e){}}
 };
 let coins=Store.get('coins',9);
-const hi=Object.assign({snake:0,breakout:0,void:0,pong:0,invaders:0,blocks:0},Store.get('hi',{}));
+const hi=Object.assign({snake:0,breakout:0,void:0,pong:0,invaders:0,blocks:0,gauntlet:0},Store.get('hi',{}));
 function saveHi(id,v){hi[id]=v;Store.set('hi',hi);}
 
 /* ================= synthesized sound ================= */
@@ -516,7 +601,7 @@ function earnCoin(){
 }
 
 /* ================= game base ================= */
-let overlayOpen=false;
+let overlayOpen=false,tour=null;
 class GameBase{
   constructor(canvas,id,mode){
     this.cv=canvas;this.ctx=canvas.getContext('2d');
@@ -529,6 +614,7 @@ class GameBase{
     this.shake=0;this.flash=0;this.flashCol='#ffffff';
     this.popups=[];this.parts=[];
     this.demoT=.7;this.overT=1.8;this._mark=1;this.readyText='';
+    this.onEnd=null;this.autoT=undefined;this.gaunt=undefined;
   }
   start(){
     this.running=true;this.last=performance.now();
@@ -539,7 +625,25 @@ class GameBase{
       if(this.mode==='demo'){this.fcount^=1;if(this.fcount){this.last=now;return;}}
       const dt=Math.min(.05,(now-this.last)/1000);
       this.last=now;
-      this.frame(dt);
+      /* hardened: an error is logged, and after 30 straight faults the
+         machine paints a fault screen instead of dying silently */
+      try{this.frame(dt);}
+      catch(err){
+        console.error('['+this.id+'] frame error:',err);
+        this._errs=(this._errs||0)+1;
+        if(this._errs===30){
+          try{
+            const c=this.ctx;
+            c.setTransform(1,0,0,1,0,0);
+            c.globalAlpha=1;
+            c.fillStyle='#0b0a08';c.fillRect(0,0,CANW,CANH);
+            c.fillStyle='#ff5533';c.font='8px "Press Start 2P"';c.textAlign='center';c.textBaseline='middle';
+            c.fillText('MACHINE FAULT',CANW/2,160);
+            c.fillStyle='#8f8672';c.font='18px "VT323"';
+            c.fillText('check console (F12) then reload',CANW/2,200);
+          }catch(e2){}
+        }
+      }
     };
     this.raf=requestAnimationFrame(loop);
   }
@@ -563,7 +667,13 @@ class GameBase{
   }
   baseUpdate(dt){
     if(this.state==='attract'){
-      if(this.mode==='demo'){this.demoT-=dt;if(this.demoT<=0)this.begin();}
+      if(this.mode==='demo'){
+        this.demoT-=dt;
+        if(this.demoT<=0)this.begin();
+      }else if(this.autoT!==undefined){
+        this.autoT-=dt;
+        if(this.autoT<=0)this.begin();
+      }
       return true;
     }
     if(this.state==='ready'){
@@ -591,15 +701,21 @@ class GameBase{
     while(this.score>=this._mark*step){this._mark++;earnCoin();this.popup('+1 CREDIT',CANW/2,44);}
   }
   gameOver(){
+    if(this.state==='over')return;
     this.state='over';this.overT=1.9;
     this.sfx('over');
     if(this.newHi&&this.mode==='play'){this.sfx('fanfare');toast('NEW HI-SCORE - '+this.score+' PTS');}
+    if(this.mode==='play'&&this.onEnd){
+      const f=this.onEnd;this.onEnd=null;
+      f(this.score);
+    }
   }
   pause(v){
     if(this.state!=='play')return;
     this.paused=(v===undefined)?!this.paused:v;
     Sfx.play('ui');
   }
+  beginShake(a=1){this.shake=a;}
   /* ---- draw helpers ---- */
   txt(s,x,y,o={}){
     const c=this.ctx;
@@ -628,6 +744,17 @@ class GameBase{
   }
   veil(a){this.ctx.fillStyle=`rgba(0,0,0,${a})`;this.ctx.fillRect(0,0,CANW,CANH);}
   drawAttract(){
+    if(this.gaunt){
+      const g=this.gaunt;
+      this.veil(.68);
+      this.txt('GAUNTLET EVENT '+(g.i+1)+' OF '+g.n,CANW/2,88,{size:10,color:'#ffb100'});
+      this.txt(this.title,CANW/2,138,{size:20});
+      this.txt(this.tag,CANW/2,174,{size:20,font:'vt',color:'#8f8672'});
+      this.txt(this.controls,CANW/2,226,{size:19,font:'vt',color:'#6f6754'});
+      this.txt('RUNNING TOTAL '+pad(g.total),CANW/2,266,{size:9,color:'#ffd24a'});
+      if(this.blinkOn)this.txt('EVENT STARTS IN '+Math.max(0,Math.ceil(this.autoT)),CANW/2,314,{size:10,color:'#e8dcc4'});
+      return;
+    }
     this.veil(.55);
     this.txt(this.title,CANW/2,120,{size:20});
     this.txt(this.tag,CANW/2,158,{size:20,font:'vt',color:'#8f8672'});
@@ -1283,13 +1410,14 @@ class VoidGame extends GameBase{
   }
 }
 
-/* ================= GAME 4 — HYPERPONG (pong duel) ================= */
+/* ================= GAME 4 — HYPERPONG (1P vs CPU / 2P hot-seat) ================= */
 class PongGame extends GameBase{
   constructor(canvas,mode){
     super(canvas,'pong',mode);
-    this.title='HYPERPONG';this.tag='first to seven / rubber-band cpu';
-    this.controls='MOVE: MOUSE / W S / DRAG';
+    this.title='HYPERPONG';this.tag='first to seven / pick your battle';
+    this.controls='P1: W/S - P2: ARROWS - OR DRAG YOUR HALF';
     this.acc='#ffe9c0';this.coinStep=250;
+    this.twoPlayer=false;
     this.resetPlay();
   }
   resetPlay(){
@@ -1301,26 +1429,56 @@ class PongGame extends GameBase{
     this.serveDir=Math.random()<.5?-1:1;
     this.serveT=1.1;
     this.trail=[];
-    this.pTarget=null;this.keys={u:false,d:false};
-    this.state='attract';
+    this.pTarget=null;this.keys={u:false,d:false};this.keys2={u:false,d:false};
+    this.ptrDown=false;this.ptrSide=0;this.targets=[null,null];
+    this.menuSel=0;this.state='attract';
   }
-  begin(){super.begin();this.readyText='FIRST TO 7';}
+  begin(){
+    this.resetPlay();
+    if(this.mode==='play'&&this.gaunt===undefined){
+      this.state='menu';
+      this.menuSel=this.twoPlayer?1:0;
+    }else{
+      this.state='ready';this.readyT=1.3;this._lc=99;
+      this.readyText=this.twoPlayer?'2P VERSUS':'FIRST TO 7';
+    }
+  }
+  startMode(i){
+    this.twoPlayer=(i===1);
+    this.state='ready';this.readyT=1.3;this._lc=99;
+    this.readyText=this.twoPlayer?'2P VERSUS':'VS CPU';
+    this.sfx('go');
+  }
   update(dt){
     if(this.baseUpdate(dt))return;
-    // player paddle
+    if(this.state==='menu')return;
+    // left paddle (P1)
     let pv=0;
     if(this.mode==='demo'){pv=this.trackPaddle(this.pl,190,Math.sin(this.t*2.1)*14);}
     else{
       if(this.keys.u)pv-=360;
       if(this.keys.d)pv+=360;
-      if(this.pTarget!==null)pv=clamp((this.pTarget-(this.pl.y+28))*10,-430,430);
+      if(this.twoPlayer){
+        if(this.ptrDown&&this.ptrSide===0&&this.targets[0]!==null)pv=clamp((this.targets[0]-(this.pl.y+28))*12,-460,460);
+      }else if(this.pTarget!==null){
+        pv=clamp((this.pTarget-(this.pl.y+28))*10,-430,430);
+      }
     }
     this.pl.y=clamp(this.pl.y+pv*dt,28,CANH-28-56);
-    // cpu paddle with rubber-banding
-    const lead=this.pPts-this.aPts;
-    const aiSp=clamp(225+lead*14,170,300);
-    const av=this.mode==='demo'?this.trackPaddle(this.ai,200,Math.sin(this.t*2.7)*22):this.trackPaddle(this.ai,aiSp,Math.sin(this.t*3.3)*20);
-    this.ai.y=clamp(this.ai.y+av*dt,28,CANH-28-56);
+    // right paddle (P2 or CPU)
+    if(this.twoPlayer){
+      let pv2=0;
+      if(this.keys2.u)pv2-=360;
+      if(this.keys2.d)pv2+=360;
+      if(this.ptrDown&&this.ptrSide===1&&this.targets[1]!==null)pv2=clamp((this.targets[1]-(this.ai.y+28))*12,-460,460);
+      this.ai.y=clamp(this.ai.y+pv2*dt,28,CANH-28-56);
+    }else{
+      const lead=this.pPts-this.aPts;
+      const aiSp=this.mode==='demo'?200:clamp(225+lead*14,170,300);
+      const err=this.mode==='demo'?Math.sin(this.t*2.7)*22:Math.sin(this.t*3.3)*20;
+      const av=this.trackPaddle(this.ai,aiSp,err);
+      this.ai.y=clamp(this.ai.y+av*dt,28,CANH-28-56);
+    }
     // serve
     if(this.serveT>0){
       this.serveT-=dt;
@@ -1333,7 +1491,7 @@ class PongGame extends GameBase{
       }
       return;
     }
-    // ball physics
+    // ball
     const b=this.ball;
     for(let i=0;i<2;i++){
       const sdt=dt/2;
@@ -1365,7 +1523,7 @@ class PongGame extends GameBase{
     b.vx=dir*Math.abs(Math.cos(ang))*sp;
     b.vy=Math.sin(ang)*sp;
     b.x=dir>0?p.x+p.w+5:p.x-5;
-    if(p===this.pl){this.hits++;this.addScore(5);}
+    if(this.twoPlayer||p===this.pl){this.hits++;this.addScore(5);}
     this.sfx('paddle');
     this.flash=Math.max(this.flash,.1);this.flashCol='#ffffff';
   }
@@ -1378,20 +1536,57 @@ class PongGame extends GameBase{
     if(this.pPts>=7||this.aPts>=7)this.gameOver();
   }
   key(code,down){
-    if(code==='ArrowUp'||code==='KeyW')this.keys.u=down;
-    if(code==='ArrowDown'||code==='KeyS')this.keys.d=down;
+    if(this.state==='menu'){
+      if(down){
+        if(code==='ArrowUp'||code==='KeyW'){this.menuSel=0;this.sfx('ui');}
+        if(code==='ArrowDown'||code==='KeyS'){this.menuSel=1;this.sfx('ui');}
+        if(code==='Digit1')this.menuSel=0;
+        if(code==='Digit2')this.menuSel=1;
+        if(code==='Space'||code==='Enter')this.startMode(this.menuSel);
+      }
+      return;
+    }
+    const p1u=code==='KeyW',p1d=code==='KeyS';
+    const p2u=code==='ArrowUp',p2d=code==='ArrowDown';
+    if(this.twoPlayer){
+      if(p1u)this.keys.u=down;
+      if(p1d)this.keys.d=down;
+      if(p2u)this.keys2.u=down;
+      if(p2d)this.keys2.d=down;
+    }else{
+      if(p1u||p2u)this.keys.u=down;
+      if(p1d||p2d)this.keys.d=down;
+    }
   }
   pdown(p){
     if(this.paused){this.pause(false);return;}
+    if(this.state==='menu'){
+      if(Math.abs(p.y-150)<30)this.startMode(0);
+      else if(Math.abs(p.y-212)<30)this.startMode(1);
+      else{this.menuSel=p.y<181?0:1;this.sfx('ui');}
+      return;
+    }
     if(this.state==='attract'||this.state==='over'){tryInsertCoin();return;}
-    this.pTarget=p.y;
+    this.ptrDown=true;
+    this.ptrSide=this.twoPlayer?(p.x<CANW/2?0:1):0;
+    if(this.twoPlayer)this.targets[this.ptrSide]=p.y;
+    else this.pTarget=p.y;
   }
-  pmove(p){this.pTarget=p.y;}
-  pup(){}
+  pmove(p){
+    if(this.state==='menu')return;
+    if(this.twoPlayer){
+      if(this.ptrDown)this.targets[this.ptrSide]=p.y;
+    }else{
+      this.pTarget=p.y;
+    }
+  }
+  pup(){this.ptrDown=false;}
   drawOver(){
     const win=this.pPts>=7;
+    const head=this.twoPlayer?(win?'P1 WINS':'P2 WINS'):(win?'YOU WIN':'CPU WINS');
+    const col=win?'#54ff6e':'#ff5533';
     this.veil(.58);
-    this.txt(win?'YOU WIN':'CPU WINS',CANW/2,110,{size:19,color:win?'#54ff6e':'#ff5533'});
+    this.txt(head,CANW/2,110,{size:19,color:col});
     this.txt(this.pPts+' - '+this.aPts,CANW/2,156,{size:12,color:'#e8dcc4'});
     this.txt('SCORE '+pad(this.score),CANW/2,184,{size:9,color:'#8f8672'});
     this.txt('BEST '+pad(this.hi),CANW/2,206,{size:8,color:'#8f8672'});
@@ -1401,6 +1596,19 @@ class PongGame extends GameBase{
       if(this.blinkOn)this.txt('INSERT COIN / SPACE',CANW/2,286,{size:10,color:'#ffb100'});
       if(coins===0)this.txt('BROKE? ON THE HOUSE.',CANW/2,314,{size:18,font:'vt',color:'#8f8672'});
     }
+  }
+  drawMenu(){
+    this.veil(.6);
+    this.txt('HYPERPONG',CANW/2,84,{size:18});
+    const items=['1P - VS CPU','2P - VERSUS'];
+    items.forEach((s,i)=>{
+      const y=150+i*62;
+      const sel=this.menuSel===i;
+      if(sel&&this.blinkOn)this.txt('>',108,y,{size:11});
+      this.txt(s,CANW/2,y,{size:11,color:sel?'#ffe9c0':'#6f6754'});
+    });
+    this.txt('P1: W/S - P2: ARROWS - OR DRAG YOUR HALF',CANW/2,290,{size:18,font:'vt',color:'#6f6754'});
+    this.txt('UP / DOWN + SPACE, OR TAP AN OPTION',CANW/2,322,{size:17,font:'vt',color:'#8f8672'});
   }
   draw(){
     const c=this.ctx;
@@ -1421,14 +1629,17 @@ class PongGame extends GameBase{
     c.fillStyle='#ffe9c0';
     c.fillRect(this.pl.x,this.pl.y,this.pl.w,this.pl.h);
     c.fillRect(this.ai.x,this.ai.y,this.ai.w,this.ai.h);
-    if(this.serveT<=0){c.beginPath();c.arc(this.ball.x,this.ball.y,4,0,7);c.fill();}
+    if(this.serveT<=0&&this.state==='play'){c.beginPath();c.arc(this.ball.x,this.ball.y,4,0,7);c.fill();}
     c.shadowBlur=0;
     c.restore();
-    this.drawHUD(this.demoCenter(this.pPts+' - '+this.aPts));
-    this.txt('YOU',40,42,{size:16,font:'vt',color:'#8f8672'});
-    this.txt('CPU',CANW-40,42,{size:16,font:'vt',color:'#8f8672'});
+    const ctr=this.pPts+' - '+this.aPts;
+    const mp=(this.pPts===6||this.aPts===6)&&this.state==='play';
+    this.drawHUD(this.demoCenter(mp&&this.blinkOn?'MATCH POINT':ctr));
+    this.txt(this.twoPlayer?'P1':'YOU',40,42,{size:16,font:'vt',color:'#8f8672'});
+    this.txt(this.twoPlayer?'P2':'CPU',CANW-40,42,{size:16,font:'vt',color:'#8f8672'});
     if(this.serveT>0&&this.state==='play')this.txt('SERVE '+Math.max(1,Math.ceil(this.serveT)),CANW/2,190,{size:18});
     if(this.state==='attract')this.drawAttract();
+    else if(this.state==='menu')this.drawMenu();
     else if(this.state==='ready')this.drawReady();
     else if(this.state==='over')this.drawOver();
     this.drawPopups();
@@ -1448,6 +1659,16 @@ const INV_SPR={
 };
 const INV_PLAYER=['0000001000000','0000011100000','0000011100000','0111111111110','1111111111111','1111111111111','1111111111111','1111111111111'];
 const INV_UFO=['0000011111000000','0001111111110000','0111111111111110','1111111111111111'];
+const INV_BOOM=[
+'10000000001',
+'01000000010',
+'00100100100',
+'00011111000',
+'00100100100',
+'01000000010',
+'10000000001',
+'00100000100'
+];
 
 class InvadersGame extends GameBase{
   constructor(canvas,mode){
@@ -1462,7 +1683,9 @@ class InvadersGame extends GameBase{
     };
     this.imgPlayer=this.bitmap([INV_PLAYER],'#ffe9c0')[0];
     this.imgUfo=this.bitmap([INV_UFO],'#ff6fd8')[0];
+    this.imgBoom=this.bitmap([INV_BOOM],'#ffe9c0')[0];
     this.resetPlay();
+    this.demoT=3;   // linger on the score table when the cabinet demos itself
   }
   bitmap(frames,color,px=2){
     return frames.map(rows=>{
@@ -1473,14 +1696,27 @@ class InvadersGame extends GameBase{
       return cv;
     });
   }
+  /* attract cycle: every third demo restart shows the score table again */
+  begin(){
+    this.resetPlay();
+    this._cycles=(this._cycles||0)+1;
+    if(this.mode==='demo'&&this._cycles%3===0){
+      this.state='attract';this.demoT=3.2;
+      return;
+    }
+    this.readyText='';
+    this.state='ready';this.readyT=1.3;this._lc=99;
+  }
   resetPlay(){
     this.score=0;this.newHi=false;this._mark=1;
     this.lives=3;this.wave=1;
     this.px=CANW/2;this.inv=0;this.fireCd=0;this.fireHeld=false;this.drag=null;
     this.keys={l:false,r:false,fire:false};
     this._dvx=0;this._dfire=false;
-    this.bullets=[];this.ebullets=[];
+    this.bullets=[];this.ebullets=[];this.booms=[];
     this.ufo=null;this.ufoT=rand(12,20);
+    this.stars=[];
+    for(let i=0;i<44;i++)this.stars.push({x:rand(0,CANW),y:rand(28,344),z:Math.random()});
     this.state='attract';
     this.resetFormation();
     this.resetShields();
@@ -1492,7 +1728,11 @@ class InvadersGame extends GameBase{
     for(let r=0;r<5;r++)for(let col=0;col<8;col++)
       this.aliens.push({c:col,r,type:types[r],pts:pts[types[r]],alive:true});
     this.fx=90;this.fy=Math.min(44+(this.wave-1)*8,86);
-    this.fdir=1;this.stepT=.8;this.frame=0;this.noteI=0;
+    this.fdir=1;this.stepT=.8;this.noteI=0;
+    /* THE FIX: this counter used to be named "frame", which silently
+       overwrote the engine's frame() render method and made the whole
+       game throw on every render — black screen since day one. */
+    this.aniFrame=0;
     this.efireT=1.2;this.eSpeed=120+this.wave*10;
   }
   resetShields(){
@@ -1508,13 +1748,14 @@ class InvadersGame extends GameBase{
     const sp=this.spr[a.type].img[0];
     const x=this.fx+a.c*34+(34-sp.width)/2;
     const y=this.fy+a.r*26+5;
-    return {x,y,cx:x+sp.width/2};
+    return {x,y,w:sp.width,cx:x+sp.width/2};
   }
   aliveCount(){return this.aliens.filter(a=>a.alive).length;}
   killAlien(a){
     a.alive=false;
     this.addScore(a.pts);
     const p=this.alienPos(a);
+    this.booms.push({x:p.cx,y:p.y+8,t:.28});
     this.popup('+'+a.pts,p.cx,p.y+8);
     this.spawnBurst(p.cx,p.y+8,'#ff6fd8',9,130,4);
     this.sfx('alien');
@@ -1522,22 +1763,24 @@ class InvadersGame extends GameBase{
   hitPlayer(){
     this.lives--;
     this.sfx('die');
+    this.booms.push({x:this.px,y:336,t:.4});
     this.spawnBurst(this.px,336,'#ff6fd8',20,200,5);
     this.flash=.6;this.flashCol='#ff5533';this.shake=1;
     if(this.lives<=0)this.gameOver();
     else this.inv=1.8;
   }
-  carveShield(x,y){
+  carveShield(x,y,rad){
     let hit=false;
     for(const cell of this.shields){
       if(!cell.on)continue;
       if(x>cell.x-2&&x<cell.x+8&&y>cell.y-2&&y<cell.y+8)hit=true;
     }
     if(hit){
+      const rr=rad*rad;
       for(const cell of this.shields){
         if(!cell.on)continue;
         const dx=x-(cell.x+3),dy=y-(cell.y+3);
-        if(dx*dx+dy*dy<100)cell.on=false;
+        if(dx*dx+dy*dy<rr)cell.on=false;
       }
     }
     return hit;
@@ -1548,11 +1791,18 @@ class InvadersGame extends GameBase{
       const p=this.alienPos(a);
       for(const cell of this.shields){
         if(!cell.on)continue;
-        if(cell.x+6>p.x&&cell.x<p.x+26&&cell.y+6>p.y&&cell.y<p.y+18)cell.on=false;
+        if(cell.x+6>p.x&&cell.x<p.x+p.w&&cell.y+6>p.y&&cell.y<p.y+18)cell.on=false;
       }
     }
   }
   update(dt){
+    // ambient life runs in every state (stars, explosions)
+    for(const st of this.stars){
+      st.y+=(6+st.z*20)*dt;
+      if(st.y>344){st.y=28;st.x=rand(0,CANW);}
+    }
+    for(const bm of this.booms)bm.t-=dt;
+    this.booms=this.booms.filter(b=>b.t>0);
     if(this.baseUpdate(dt))return;
     const s=this;
     s.inv=Math.max(0,s.inv-dt);
@@ -1582,17 +1832,17 @@ class InvadersGame extends GameBase{
       s.fx+=s.fdir*10;
       const edge=s.formationEdge();
       if(edge<8||edge>CANW-8){s.fdir*=-1;s.fx+=s.fdir*10;s.fy+=16;}
-      s.frame^=1;
+      s.aniFrame^=1;
       s.sfx('march',{f:[110,98,87,82][s.noteI]});
       s.noteI=(s.noteI+1)%4;
-      if(s.fy+5*26>280)s.carveAliens();
-      if(s.fy+4*26>=326){s.gameOver();return;}
+      if(s.fy+125>=288)s.carveAliens();
+      if(s.fy+122>=324){s.gameOver();return;}
     }
     // bullets
     for(const b of s.bullets)b.y-=430*dt;
     s.bullets=s.bullets.filter(b=>b.y>24&&!b.dead);
     for(const b of s.ebullets)b.y+=s.eSpeed*dt;
-    s.ebullets=s.ebullets.filter(b=>b.y<356&&!b.dead);
+    s.ebullets=s.ebullets.filter(b=>b.y<344&&!b.dead);
     // enemy fire
     s.efireT-=dt;
     if(s.efireT<=0&&s.ebullets.length<3&&s.aliveCount()>0){
@@ -1606,21 +1856,34 @@ class InvadersGame extends GameBase{
         s.ebullets.push({x:p.cx,y:p.y+18,dead:false});
       }
     }
-    // ufo
+    // ufo (timer re-arms so saucers come on a rhythm, never in a parade)
     if(!s.ufo&&s.ufoT<=0&&s.aliveCount()>7){s.ufo={x:s.wave%2?-40:CANW+40,dir:s.wave%2?1:-1,t:0};}
     if(s.ufo){
       s.ufo.x+=s.ufo.dir*95*dt;
       s.ufo.t+=dt;
       if(s.ufo.t>.32){s.ufo.t=0;s.sfx('ufo');}
-      if(s.ufo.x<-50||s.ufo.x>CANW+50)s.ufo=null;
+      if(s.ufo.x<-50||s.ufo.x>CANW+50){s.ufo=null;s.ufoT=rand(14,22);}
     }
     // player bullet collisions
     for(const b of s.bullets){
       if(b.dead)continue;
+      // your shots can shoot enemy fire out of the air
+      for(const eb of s.ebullets){
+        if(eb.dead)continue;
+        if(Math.abs(b.x-eb.x)<5&&Math.abs(b.y-eb.y)<10){
+          b.dead=true;eb.dead=true;
+          s.booms.push({x:b.x,y:b.y,t:.15});
+          s.spawnBurst(b.x,b.y,'#ffe9c0',4,90,3);
+          s.sfx('wall');
+          break;
+        }
+      }
+      if(b.dead)continue;
       if(s.ufo&&Math.abs(b.x-s.ufo.x-16)<18&&Math.abs(b.y-38)<8){
-        b.dead=true;s.ufo=null;
+        b.dead=true;s.ufo=null;s.ufoT=rand(14,22);
+        s.booms.push({x:b.x,y:38,t:.32});
         const v=irand(1,3)*50;
-        s.addScore(v);s.popup('+'+v,b.x,44,'#ffd24a');
+        s.addScore(v);s.popup('+'+v,b.x,52,'#ffd24a');
         s.spawnBurst(b.x,40,'#ff6fd8',12,150,4);
         s.sfx('bonus');s.shake=Math.max(s.shake,.5);
         continue;
@@ -1628,17 +1891,20 @@ class InvadersGame extends GameBase{
       for(const a of s.aliens){
         if(!a.alive)continue;
         const p=s.alienPos(a);
-        if(Math.abs(b.x-p.cx)<14&&b.y>p.y-2&&b.y<p.y+18){b.dead=true;s.killAlien(a);break;}
+        if(Math.abs(b.x-p.cx)<p.w/2+2&&b.y>p.y-2&&b.y<p.y+18){b.dead=true;s.killAlien(a);break;}
       }
       if(b.dead)continue;
-      if(s.carveShield(b.x,b.y)){b.dead=true;s.sfx('wall');}
+      if(s.carveShield(b.x,b.y,5)){b.dead=true;s.sfx('wall');}
     }
     s.bullets=s.bullets.filter(b=>!b.dead);
     // enemy bullets
     for(const b of s.ebullets){
       if(b.dead)continue;
-      if(s.carveShield(b.x,b.y)){b.dead=true;s.sfx('wall');continue;}
-      if(s.inv<=0&&Math.abs(b.x-s.px)<13&&b.y>326&&b.y<344){b.dead=true;s.hitPlayer();}
+      if(s.carveShield(b.x,b.y,9)){b.dead=true;s.sfx('wall');continue;}
+      if(s.inv<=0&&Math.abs(b.x-s.px)<13&&b.y>326&&b.y<344){
+        b.dead=true;s.hitPlayer();
+        if(s.state!=='play')break;
+      }
     }
     s.ebullets=s.ebullets.filter(b=>!b.dead);
     // wave cleared
@@ -1657,7 +1923,7 @@ class InvadersGame extends GameBase{
     for(const a of this.aliens){
       if(!a.alive)continue;
       const p=this.alienPos(a);
-      mn=Math.min(mn,p.x);mx=Math.max(mx,p.x+26);
+      mn=Math.min(mn,p.x);mx=Math.max(mx,p.x+p.w);
     }
     return this.fdir>0?mx:mn;
   }
@@ -1678,7 +1944,7 @@ class InvadersGame extends GameBase{
       }
       if(best&&bd>4)tx=best.cx;
       if(best&&bd<10&&Math.random()<.6)this._dfire=true;
-      if(Math.random()<.008)this._dfire=true;
+      if(Math.random()<.02)this._dfire=true;
     }
     this._dvx=clamp((tx-this.px)*5,-260,260);
   }
@@ -1694,36 +1960,85 @@ class InvadersGame extends GameBase{
   }
   pmove(p){if(this.drag!==null)this.drag=p.x;}
   pup(){this.drag=null;this.fireHeld=false;}
+  /* the classic score-advance table sells the cabinet */
+  drawAttract(){
+    if(this.gaunt){super.drawAttract();return;}
+    this.veil(.62);
+    this.txt(this.title,CANW/2,70,{size:18});
+    this.txt(this.tag,CANW/2,102,{size:19,font:'vt',color:'#8f8672'});
+    this.txt('* SCORE ADVANCE TABLE *',CANW/2,146,{size:9,color:'#ffe9c0'});
+    const rows=[
+      {img:this.imgUfo,dx:16,label:'= ? MYSTERY'},
+      {img:this.spr.squid.img[0],dx:8,label:'= 30 POINTS'},
+      {img:this.spr.crab.img[0],dx:11,label:'= 20 POINTS'},
+      {img:this.spr.octo.img[0],dx:12,label:'= 10 POINTS'}
+    ];
+    rows.forEach((r,i)=>{
+      const y=182+i*30;
+      this.ctx.drawImage(r.img,178-r.dx,y-8);
+      this.txt(r.label,210,y,{size:8,color:'#ffd24a',align:'left'});
+    });
+    if(this.blinkOn)this.txt('INSERT COIN',CANW/2,314,{size:11,color:'#ffb100'});
+    if(this.mode==='play')this.txt('CLICK SCREEN / SPACE TO START',CANW/2,344,{size:16,font:'vt',color:'#6f6754'});
+  }
   draw(){
     const c=this.ctx;
     c.save();
     c.fillStyle='#0b0609';
     c.fillRect(0,0,CANW,CANH);
     this.applyShake(c);
+    // starfield
+    for(const st of this.stars){
+      c.fillStyle=st.z<.5?'rgba(255,220,240,.18)':'rgba(255,220,240,.4)';
+      const sz=st.z<.5?1:2;
+      c.fillRect(st.x,st.y,sz,sz);
+    }
+    // cellophane lanes: ufo band + bunker band
+    c.fillStyle='rgba(255,111,216,.06)';c.fillRect(0,26,CANW,30);
+    c.fillStyle='rgba(77,255,210,.07)';c.fillRect(0,284,CANW,36);
+    // aliens
     for(const a of this.aliens){
       if(!a.alive)continue;
       const p=this.alienPos(a);
-      c.drawImage(this.spr[a.type].img[this.frame],p.x,p.y);
+      c.drawImage(this.spr[a.type].img[this.aniFrame],p.x,p.y);
     }
+    // explosion sprites
+    for(const bm of this.booms)c.drawImage(this.imgBoom,bm.x-11,bm.y-8);
+    // ufo
     if(this.ufo){
       c.drawImage(this.imgUfo,this.ufo.x,30);
       c.fillStyle='#ffd24a';
       const k=Math.floor(this.t*10)%3;
       c.fillRect(this.ufo.x+6+k*10,34,3,3);
     }
-    c.fillStyle='#4dffd2';
+    // bunkers
     for(const cell of this.shields){
-      if(cell.on)c.fillRect(cell.x,cell.y,6,6);
+      if(!cell.on)continue;
+      c.fillStyle='#4dffd2';
+      c.fillRect(cell.x,cell.y,6,6);
+      c.fillStyle='rgba(0,0,0,.3)';
+      c.fillRect(cell.x,cell.y+4,6,2);
     }
+    // bullets
     c.fillStyle='#ffe9c0';
     for(const b of this.bullets)c.fillRect(b.x-1,b.y-6,2,8);
     c.fillStyle='#ff6fd8';
     for(const b of this.ebullets)c.fillRect(b.x-1,b.y,2,8);
+    // cannon
     const blink=this.inv>0&&Math.floor(this.t*14)%2===0;
-    if(!blink&&this.state!=='over')c.drawImage(this.imgPlayer,this.px-13,328);
-    if(this.state==='play'||this.state==='ready'){
-      for(let i=0;i<Math.max(0,this.lives-1);i++)c.drawImage(this.imgPlayer,10+i*34,346,13,8);
+    if(!blink&&this.state!=='over'){
+      c.save();
+      c.shadowColor='#ffe9c0';c.shadowBlur=8;
+      c.drawImage(this.imgPlayer,this.px-13,328);
+      c.restore();
     }
+    // ground line + lives + credits (the classic bottom row)
+    c.fillStyle='rgba(77,255,210,.55)';
+    c.fillRect(0,347,CANW,2);
+    if(this.state==='play'||this.state==='ready'){
+      for(let i=0;i<Math.max(0,this.lives-1);i++)c.drawImage(this.imgPlayer,8+i*28,351,13,8);
+    }
+    this.txt(this.mode==='play'?('CREDIT '+Math.max(0,coins)):'FREE PLAY',CANW-8,354,{size:8,color:'#8f8672',align:'right'});
     this.drawParts();
     c.restore();
     this.drawHUD(this.demoCenter('WAVE '+String(this.wave).padStart(2,'0')));
@@ -1890,7 +2205,6 @@ class BlocksGame extends GameBase{
       }
     }
   }
-  /* demo AI: evaluate every rotation/column, then walk there */
   demoStep(){
     if(!this.cur)return;
     if(!this.plan)this.plan=this.bestPlan();
@@ -1957,7 +2271,7 @@ class BlocksGame extends GameBase{
     if(!down){
       if(code==='ArrowLeft'||code==='KeyA')this.keys.l=false;
       if(code==='ArrowRight'||code==='KeyD')this.keys.r=false;
-      if(code==='ArrowDown'||code==='KeyS'){this.softDrop=false;}
+      if(code==='ArrowDown'||code==='KeyS')this.softDrop=false;
       return;
     }
     if(this.state!=='play'||this.clearT>0)return;
@@ -2064,7 +2378,7 @@ const GAMES={
   snake:{cls:SnakeGame,title:'SERPENTRON',hint:'ARROWS / WASD / SWIPE — DON\u2019T BITE YOURSELF'},
   breakout:{cls:BreakoutGame,title:'BRICKSTORM',hint:'MOVE: MOUSE OR ARROWS — LAUNCH: SPACE / TAP'},
   void:{cls:VoidGame,title:'VOIDRUNNER',hint:'MOVE: WASD / ARROWS / DRAG — FIRE: SPACE / AUTO'},
-  pong:{cls:PongGame,title:'HYPERPONG',hint:'MOVE: MOUSE / W-S / DRAG — FIRST TO 7 POINTS'},
+  pong:{cls:PongGame,title:'HYPERPONG',hint:'P1: W/S · P2: ARROWS · OR DRAG YOUR HALF — FIRST TO 7'},
   invaders:{cls:InvadersGame,title:'STARSIEGE',hint:'MOVE: ARROWS / DRAG — FIRE: SPACE / AUTO'},
   blocks:{cls:BlocksGame,title:'GRAVITRON',hint:'ROTATE: UP / W — MOVE: ARROWS — HARD DROP: SPACE'}
 };
@@ -2093,34 +2407,64 @@ function openGame(id){
   overlayOpen=true;
   overlay.classList.add('open');
   document.body.classList.add('locked');
+  $('#results').classList.remove('show');
+  $('#gauntletBar').classList.remove('show');
   $('#gTitle').textContent=GAMES[id].title;
   $('#hintText').textContent=GAMES[id].hint;
   const inner=$('#screenInner');
   inner.classList.remove('off','boot');void inner.offsetWidth;inner.classList.add('boot');
   Sfx.play('power');
-  currentGame=new GAMES[id].cls(gameCanvas,'play');
-  currentGame.start();
+  try{
+    currentGame=new GAMES[id].cls(gameCanvas,'play');
+    currentGame.start();
+  }catch(err){
+    console.error('game boot failed for '+id,err);
+    currentGame=null;
+    toast('MACHINE FAULT - PICK ANOTHER CABINET');
+    closeGame();
+    return;
+  }
   updateCoins();
   syncPlaybar();
   clearInterval(barTimer);
   barTimer=setInterval(syncPlaybar,250);
 }
 function closeGame(){
-  if(!currentGame||closing)return;
+  if(closing)return;
+  /* never leave the player stuck: closing works even if no game is running */
+  if(!currentGame&&!tour){
+    overlayOpen=false;
+    overlay.classList.remove('open');
+    document.body.classList.remove('locked');
+    $('#results').classList.remove('show');
+    $('#gauntletBar').classList.remove('show');
+    refreshHall();
+    return;
+  }
+  const wasTour=!!tour;
+  const completed=tour?tour.results.length:0;
   closing=true;
   clearInterval(barTimer);
-  const g=currentGame;
+  if(currentGame)currentGame.destroy();
   $('#screenInner').classList.add('off');
   Sfx.play('poweroff');
   setTimeout(()=>{
-    g.destroy();
     currentGame=null;overlayOpen=false;currentId=null;closing=false;
     overlay.classList.remove('open');
     document.body.classList.remove('locked');
+    $('#results').classList.remove('show');
+    $('#gauntletBar').classList.remove('show');
+    if(wasTour&&tour.running&&completed>0)toast('GAUNTLET ABANDONED - NO RECORD');
+    tour=null;
     refreshHall();
   },360);
 }
 function tryInsertCoin(){
+  if(tour){
+    if(currentGame&&currentGame.state==='attract')currentGame.begin();
+    else Sfx.play('ui');
+    return;
+  }
   if(!currentGame)return;
   if(currentGame.state!=='attract'&&currentGame.state!=='over'){Sfx.play('ui');return;}
   if(coins>0){
@@ -2135,11 +2479,16 @@ function tryInsertCoin(){
 }
 function syncPlaybar(){
   const b=$('#coinBtn');
-  if(!currentGame){b.textContent='INSERT COIN';return;}
-  const st=currentGame.state;
-  b.textContent=(st==='attract'||st==='over')?'INSERT COIN':'IN PLAY';
+  if(tour){
+    b.textContent=currentGame&&currentGame.state==='attract'?'START EVENT':'GAUNTLET';
+  }else if(!currentGame){
+    b.textContent='INSERT COIN';
+  }else{
+    const st=currentGame.state;
+    b.textContent=st==='attract'||st==='over'?'INSERT COIN':st==='menu'?'CHOOSE MODE':'IN PLAY';
+  }
   $('#credits').textContent=coins;
-  const p=currentGame.paused;
+  const p=currentGame&&currentGame.paused;
   $('#icoPause').style.display=p?'none':'';
   $('#icoPlay').style.display=p?'':'none';
 }
@@ -2165,18 +2514,156 @@ document.addEventListener('visibilitychange',()=>{
   if(document.hidden&&currentGame&&currentGame.state==='play'&&!currentGame.paused){currentGame.pause(true);syncPlaybar();}
 });
 
+/* ================= THE GAUNTLET — six games, one score ================= */
+const TOUR_ORDER=['snake','breakout','void','pong','invaders','blocks'];
+const TOUR_COLORS={snake:'#54ff6e',breakout:'#ffb100',void:'#ff5533',pong:'#ffe9c0',invaders:'#ff6fd8',blocks:'#4dffd2'};
+const TOUR_LETTERS={snake:'S',breakout:'B',void:'V',pong:'H',invaders:'S',blocks:'G'};
+
+function buildPips(){
+  const el=$('#pips');el.innerHTML='';
+  TOUR_ORDER.forEach(id=>{
+    const s=document.createElement('span');
+    s.className='pip';s.textContent=TOUR_LETTERS[id];
+    s.style.color=TOUR_COLORS[id];s.style.borderColor=TOUR_COLORS[id];
+    el.appendChild(s);
+  });
+}
+function updateGauntletBar(){
+  if(!tour)return;
+  $$('#pips .pip').forEach((p,i)=>{
+    const id=TOUR_ORDER[i];
+    p.classList.remove('cur');
+    p.style.opacity='';
+    if(i<tour.i){p.style.background=TOUR_COLORS[id];p.style.color='#0b0a08';}
+    else{p.style.background='transparent';p.style.color=TOUR_COLORS[id];if(i===tour.i)p.classList.add('cur');else p.style.opacity=.45;}
+  });
+  $('#gTotal').textContent=pad(tour.total);
+}
+function startTournament(){
+  if(overlayOpen||closing)return;
+  if(coins>=2){coins-=2;Store.set('coins',coins);Sfx.play('coin');}
+  else{Sfx.play('coin');toast('SHORT ON CREDITS - ON THE HOUSE');}
+  updateCoins();
+  tour={i:0,total:0,results:[],running:true};
+  overlayOpen=true;
+  overlay.classList.add('open');
+  document.body.classList.add('locked');
+  $('#results').classList.remove('show');
+  $('#gauntletBar').classList.add('show');
+  buildPips();
+  updateGauntletBar();
+  clearInterval(barTimer);
+  barTimer=setInterval(syncPlaybar,250);
+  launchEvent();
+}
+function launchEvent(){
+  const id=TOUR_ORDER[tour.i];
+  $('#gTitle').textContent='GAUNTLET - EVENT '+(tour.i+1)+' OF 6';
+  $('#hintText').textContent=GAMES[id].title+' - '+GAMES[id].hint;
+  const inner=$('#screenInner');
+  inner.classList.remove('off','boot');void inner.offsetWidth;inner.classList.add('boot');
+  Sfx.play('power');
+  let g;
+  try{
+    g=new GAMES[id].cls(gameCanvas,'play');
+  }catch(err){
+    console.error('gauntlet boot failed for '+id,err);
+    toast('GAUNTLET FAULT - RUN ABORTED');
+    tour.running=false;
+    closeGame();
+    return;
+  }
+  if(id==='pong')g.twoPlayer=false;   // solo run: no hot-seat in the gauntlet
+  g.autoT=3.2;
+  g.gaunt={i:tour.i,n:6,total:tour.total};
+  g.onEnd=(score)=>tournamentEventEnd(score);
+  currentGame=g;currentId=id;
+  g.start();
+  syncPlaybar();
+}
+function tournamentEventEnd(score){
+  if(!tour||!tour.running)return;
+  tour.results.push({id:currentId,score});
+  tour.total+=score;
+  tour.i++;
+  updateGauntletBar();
+  const myTour=tour;
+  setTimeout(()=>{
+    if(tour!==myTour||!tour.running)return;
+    if(currentGame){currentGame.destroy();currentGame=null;}
+    if(tour.i>=TOUR_ORDER.length)finishTournament();
+    else launchEvent();
+  },900);
+}
+function finishTournament(){
+  if(currentGame){currentGame.destroy();currentGame=null;}
+  drawFinish();
+  tour.running=false;
+  const isRec=tour.total>hi.gauntlet;
+  if(isRec)saveHi('gauntlet',tour.total);
+  coins+=3;Store.set('coins',coins);
+  updateCoins();pulseCoin();
+  Sfx.play(isRec?'fanfare':'level');
+  toast('GAUNTLET COMPLETE - +3 CREDITS');
+  showResults(isRec);
+  syncPlaybar();
+}
+function drawFinish(){
+  const c=gameCanvas.getContext('2d');
+  c.fillStyle='#0d0b07';c.fillRect(0,0,CANW,CANH);
+  c.strokeStyle='rgba(255,177,0,.4)';c.lineWidth=2;
+  c.strokeRect(10,30,CANW-20,CANH-60);
+  c.font='16px "Press Start 2P"';c.textAlign='center';c.textBaseline='middle';
+  c.fillStyle='#ffb100';c.fillText('GAUNTLET COMPLETE',CANW/2,120);
+  c.fillStyle='#e8dcc4';c.font='11px "Press Start 2P"';
+  c.fillText('TOTAL '+pad(tour.total),CANW/2,180);
+  c.font='20px "VT323"';c.fillStyle='#8f8672';
+  c.fillText('collect your credits at the door',CANW/2,338);
+}
+function showResults(isRec){
+  const rows=$('#resRows');rows.innerHTML='';
+  const max=Math.max(1,...tour.results.map(r=>r.score));
+  tour.results.forEach(r=>{
+    const d=document.createElement('div');
+    d.className='resRow';
+    d.innerHTML=`<div class="rt"><span style="color:${TOUR_COLORS[r.id]}">${GAMES[r.id].title}</span><em>${r.score} PTS</em></div><div class="rb"><i style="width:${Math.max(4,Math.round(r.score/max*100))}%;background:${TOUR_COLORS[r.id]}"></i></div>`;
+    rows.appendChild(d);
+  });
+  $('#resTotal').textContent=pad(tour.total);
+  $('#resNote').textContent=isRec?'NEW HOUSE RECORD - SAVED':'';
+  $('#results').classList.add('show');
+}
+ $('#resExitBtn').addEventListener('click',()=>{Sfx.play('ui');closeGame();});
+ $('#againBtn').addEventListener('click',()=>{
+  if(coins>=2){coins-=2;Store.set('coins',coins);Sfx.play('coin');}
+  else{Sfx.play('coin');toast('ON THE HOUSE');}
+  updateCoins();
+  $('#results').classList.remove('show');
+  tour={i:0,total:0,results:[],running:true};
+  buildPips();updateGauntletBar();
+  clearInterval(barTimer);
+  barTimer=setInterval(syncPlaybar,250);
+  launchEvent();
+});
+ $('#tourBtn').addEventListener('click',()=>{Sfx.ensure();Sfx.play('ui');startTournament();});
+
 /* ================= arcade hall ================= */
 const demos={};
 function initHall(){
   $$('.cabinet').forEach(cab=>{
     const id=cab.dataset.game;
     const cv=cab.querySelector('canvas');
-    const g=new GAMES[id].cls(cv,'demo');
-    g.start();
-    demos[id]=g;
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(es=>{g.visible=es[0].isIntersecting;},{rootMargin:'80px'}).observe(cv);
+    try{
+      const g=new GAMES[id].cls(cv,'demo');
+      g.start();
+      demos[id]=g;
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(es=>{g.visible=es[0].isIntersecting;},{rootMargin:'80px'}).observe(cv);
+      }
+    }catch(err){
+      console.error('demo boot failed for '+id,err);
     }
+    /* play handlers attach no matter what, so every cabinet always works */
     const open=()=>{Sfx.ensure();openGame(id);};
     cab.querySelector('.playbtn').addEventListener('click',e=>{e.stopPropagation();Sfx.ensure();Sfx.play('ui');open();});
     const bez=cab.querySelector('.bezel');
@@ -2193,11 +2680,12 @@ function refreshHall(){
     cab.querySelector('.hiscr').textContent='HI '+pad(hi[id]);
     if(demos[id])demos[id].hi=hi[id];
   });
+  $('#kioskHi').textContent='RECORD '+pad(hi.gauntlet);
   const t=tickerText();
   $('#tk1').textContent=t;$('#tk2').textContent=t;
 }
 function tickerText(){
-  return `CATHODE CLUB // FREE PLAY TONIGHT // HI-SCORES: SERPENTRON ${pad(hi.snake)} / BRICKSTORM ${pad(hi.breakout)} / VOIDRUNNER ${pad(hi.void)} / HYPERPONG ${pad(hi.pong)} / STARSIEGE ${pad(hi.invaders)} / GRAVITRON ${pad(hi.blocks)} // CREDITS EARNED AS YOU SCORE // `;
+  return `CATHODE CLUB // FREE PLAY TONIGHT // HI-SCORES: SERPENTRON ${pad(hi.snake)} / BRICKSTORM ${pad(hi.breakout)} / VOIDRUNNER ${pad(hi.void)} / HYPERPONG ${pad(hi.pong)} / STARSIEGE ${pad(hi.invaders)} / GRAVITRON ${pad(hi.blocks)} / GAUNTLET RECORD ${pad(hi.gauntlet)} // CREDITS EARNED AS YOU SCORE // `;
 }
 
 /* flickering sign + marquee tiles */
